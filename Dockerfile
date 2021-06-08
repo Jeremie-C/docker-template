@@ -4,7 +4,7 @@ LABEL maintainer="Jeremie-C <Jeremie-C@users.noreply.github.com>"
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
   # S6 Install
-  ca-certificates wget \  
+  ca-certificates wget && \  
   # Nettoyage
   rm -rf /var/lib/apt/lists/*
 
