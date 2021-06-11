@@ -10,15 +10,15 @@ RUN apt-get update && apt-get upgrade -y && \
   # S6 Install
   ca-certificates wget && \  
   # Nettoyage
-  rm -rf /var/lib/apt/lists/*&& \
+  rm -rf /var/lib/apt/lists/* && \
   # S6 OVERLAY
   chmod +x /scripts/s6-overlay.sh && \
   /scripts/s6-overlay.sh && \
-  rm /scripts/s6-overlay.sh
-
-# Nettoyage
-RUN apt-get remove -y ca-certificates wget && \
+  # Nettoyage
+  apt-get remove -y ca-certificates wget && \
   apt-get autoremove -y && \
-  rm -rf /tmp/* /scripts /var/lib/apt/lists/*
+  rm -rf /scripts /var/lib/apt/lists/*
 
 ENTRYPOINT ["/init"]
+
+HEALTHCHECK --start-period=120s --interval=300s CMD /healthcheck.sh
