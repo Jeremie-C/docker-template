@@ -1,5 +1,4 @@
 FROM debian:buster-slim
-LABEL maintainer="Jeremie-C <Jeremie-C@users.noreply.github.com>"
 
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
@@ -14,6 +13,8 @@ RUN apt-get update && apt-get upgrade -y && \
   # S6 OVERLAY
   chmod +x /scripts/s6-overlay.sh && \
   /scripts/s6-overlay.sh && \
+  # Healtcheck 
+  chmod +x /healthcheck.sh
   # Nettoyage
   apt-get remove -y ca-certificates wget && \
   apt-get autoremove -y && \
@@ -22,3 +23,5 @@ RUN apt-get update && apt-get upgrade -y && \
 ENTRYPOINT ["/init"]
 
 HEALTHCHECK --start-period=120s --interval=300s CMD /healthcheck.sh
+
+LABEL maintainer="Jeremie-C <Jeremie-C@users.noreply.github.com>"
