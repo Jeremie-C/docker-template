@@ -14,7 +14,7 @@ RUN apt-get update && apt-get upgrade -y && \
   chmod +x /scripts/s6-overlay.sh && \
   /scripts/s6-overlay.sh && \
   # Healtcheck 
-  chmod +x /healthcheck.sh
+  chmod +x /healthcheck.sh && \
   # Nettoyage
   apt-get remove -y ca-certificates wget && \
   apt-get autoremove -y && \
